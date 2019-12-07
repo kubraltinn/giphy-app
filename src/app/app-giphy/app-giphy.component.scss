@@ -1,0 +1,48 @@
+@import "~bootstrap/scss/bootstrap-grid.scss";
+
+.gif-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 410px);
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, 410px);
+  }
+
+  .gif-inner {
+    margin: 10px auto;
+    width: 400px;
+    height: 400px;
+
+    @include media-breakpoint-down(sm) {
+      margin: 10px 0;
+      width: 100%;
+    }
+  }
+}
+
+.input-wrapper {
+  .search-button {
+    width: 40px;
+    height: 36px;
+    border: 1px solid hotpink;
+    background: hotpink;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .search-input {
+    width: 100%;
+    border: 3px solid hotpink;
+    border-right: none;
+    height: 35px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+    font-size: 16px;
+  }
+}

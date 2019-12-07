@@ -1,0 +1,14 @@
+<div class="container-fluid px-0" *ngIf="getTrendingGifs()">
+  <div class="input-wrapper d-flex">
+    <input class="search-input" name="title" placeholder="Search Gif.." #searchTerm>
+    <button class="search-button" (click)="navigateSearch(searchTerm)"><i class="fa fa-search"></i></button>
+  </div>
+  <br>
+  <div infiniteScroll
+       [infiniteScrollDistance]="1"
+       [infiniteScrollThrottle]="50"
+       (scrolled)="onScroll()"
+        class="gif-wrapper">
+    <img class="gif-inner" *ngFor='let gif of getTrendingGifs(), let gifIndex=index' src="{{getGifImageUrl(gifIndex)}}" alt="">
+  </div>
+</div>
