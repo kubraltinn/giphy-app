@@ -1,0 +1,25 @@
+@import "~bootstrap/scss/bootstrap-grid.scss";
+
+.input-wrapper {
+  height: 45px;
+  .search-button {
+    width: 40px;
+    border: 1px solid hotpink;
+    background: hotpink;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .search-input {
+    width: 100%;
+    border: 3px solid hotpink;
+    border-right: none;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+    font-size: 16px;
+  }
+}

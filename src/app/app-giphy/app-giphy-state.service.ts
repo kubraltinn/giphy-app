@@ -4,6 +4,7 @@ import {Injectable} from '@angular/core';
 export class AppGiphyStateService {
   private trendingGifs = [];
   private searchedGifs = [];
+  private loading: boolean = false;
 
   constructor() {
   }
@@ -22,5 +23,13 @@ export class AppGiphyStateService {
 
   setTrendingGifs(gifs): void {
     this.trendingGifs = gifs;
+  }
+
+  isLoading(): boolean {
+    return this.loading;
+  }
+
+  setLoading(loading: boolean): void {
+    this.loading = loading;
   }
 }

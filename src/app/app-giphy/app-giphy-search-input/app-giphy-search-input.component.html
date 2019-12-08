@@ -1,0 +1,4 @@
+<div class="input-wrapper d-flex">
+  <input class="search-input" name="title" [value]="term" placeholder="Search Gif.." #searchTerm>
+  <button class="search-button" (click)="onSearchClick(searchTerm.value)"><i class="fa fa-search"></i></button>
+</div>

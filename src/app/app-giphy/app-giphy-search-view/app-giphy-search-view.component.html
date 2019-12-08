@@ -1,0 +1,9 @@
+<div class="container-fluid px-0" *ngIf="getGifs()">
+  <app-giphy-search-input (onSearch)="doSearch($event)"></app-giphy-search-input>
+  <br>
+
+  <div class="gif-wrapper">
+    <img class="gif-inner" *ngFor='let gif of getGifs(), let gifIndex=index' src="{{getGifImageUrl(gifIndex)}}" alt="">
+  </div>
+  <button class="load-more-button" (click)="loadMoreSearchResult()">Load More</button>
+</div>

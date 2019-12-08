@@ -10,7 +10,7 @@ const gifslimit = 20;
   selector: 'app-giphy',
   templateUrl: './app-giphy.component.html',
   styleUrls: ['./app-giphy.component.scss',
-              "../../../node_modules/font-awesome/css/font-awesome.css"]
+    './app-giphy-shared.scss', ]
 })
 export class AppGiphyComponent implements OnInit {
   trendingGifsOffset: number = 0;
@@ -33,11 +33,11 @@ export class AppGiphyComponent implements OnInit {
   }
 
   onScroll() {
-      this.fetchTrendingGifs();
+    this.fetchTrendingGifs();
   }
 
   navigateSearch(searchTerm: HTMLInputElement) {
-    this.router.navigate(['/search'], { queryParams: { term: searchTerm.value } });
+    this.router.navigate(['/search'], {queryParams: {term: searchTerm.value}});
   }
 
   getTrendingGifs() {

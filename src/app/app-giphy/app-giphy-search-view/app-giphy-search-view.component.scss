@@ -1,0 +1,15 @@
+.load-more-button {
+  width: 100%;
+  color: hotpink;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #dfdfdf;
+  height: 2em;
+  font-size: 16px;
+  margin: 10px 0;
+  cursor: pointer;
+  &:hover {
+    background: hotpink;
+    color: white;
+  }
+}

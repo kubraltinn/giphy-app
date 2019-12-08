@@ -7,15 +7,15 @@ import {ActivatedRoute} from '@angular/router';
 const searchlimit = 20;
 
 @Component({
-  selector: 'app-giphy-search',
-  templateUrl: './app-giphy-search.component.html',
-  styleUrls: ['./app-giphy-search.component.scss',
-    '../../../../node_modules/font-awesome/css/font-awesome.css']
+  selector: 'app-giphy-search-view',
+  templateUrl: './app-giphy-search-view.component.html',
+  styleUrls: ['./app-giphy-search-view.component.scss',
+    '../app-giphy-shared.scss', ]
 })
 
-export class AppGiphySearchComponent implements OnInit {
+export class AppGiphySearchViewComponent implements OnInit {
   private searchOffSet: number = 0;
-  term = "";
+  term = '';
 
   constructor(private appGiphyDataService: AppGiphyDataService,
               private appGiphyStateService: AppGiphyStateService,
@@ -38,8 +38,8 @@ export class AppGiphySearchComponent implements OnInit {
     });
   }
 
-  loadMoreSearchResult(searchTerm: HTMLInputElement): void {
-    return this.doSearch(searchTerm.value);
+  loadMoreSearchResult(): void {
+    return this.doSearch(this.term);
   }
 
   getGifImageUrl(gifIndex: number) {

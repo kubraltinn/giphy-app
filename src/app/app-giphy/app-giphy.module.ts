@@ -3,14 +3,16 @@ import {NgModule} from '@angular/core';
 import {AppGiphyDataService} from './app-giphy-data.service';
 import {AppGiphyComponent} from './app-giphy.component';
 import {HttpClientModule} from '@angular/common/http';
-import {AppGiphySearchComponent} from './app-giphy-search/app-giphy-search.component';
+import {AppGiphySearchViewComponent} from './app-giphy-search-view/app-giphy-search-view.component';
 import {AppGiphyStateService} from './app-giphy-state.service';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {AppGiphySearchInputComponent} from './app-giphy-search-input/app-giphy-search-input.component';
 
 @NgModule({
   declarations: [
     AppGiphyComponent,
-    AppGiphySearchComponent,
+    AppGiphySearchViewComponent,
+    AppGiphySearchInputComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +21,8 @@ import {InfiniteScrollModule} from 'ngx-infinite-scroll';
   ],
   exports: [
     AppGiphyComponent,
-    AppGiphySearchComponent
+    AppGiphySearchViewComponent,
+    AppGiphySearchInputComponent
   ],
   providers: [
     AppGiphyDataService,
