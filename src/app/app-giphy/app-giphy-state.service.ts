@@ -5,6 +5,7 @@ export class AppGiphyStateService {
   private trendingGifs = [];
   private searchedGifs = [];
   private loading: boolean = false;
+  private term = '';
 
   constructor() {
   }
@@ -23,6 +24,14 @@ export class AppGiphyStateService {
 
   setTrendingGifs(gifs): void {
     this.trendingGifs = gifs;
+  }
+
+  getSearchTerm(): string {
+    return this.term;
+  }
+
+  setSearchTerm(term: string): void {
+    this.term = term;
   }
 
   isLoading(): boolean {

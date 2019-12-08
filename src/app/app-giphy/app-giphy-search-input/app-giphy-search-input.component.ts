@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
+import {AppGiphyStateService} from '../app-giphy-state.service';
 
 @Component({
   selector: 'app-giphy-search-input',
@@ -10,11 +11,15 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class  AppGiphySearchInputComponent {
   @Output() onSearch = new EventEmitter();
 
-  term = "";
-
-  constructor() {}
+  constructor(private appGiphyStateService: AppGiphyStateService) {}
 
   onSearchClick(searchTerm: string): void {
+    console.log("clicked");
+    this.appGiphyStateService.setSearchTerm(searchTerm);
     this.onSearch.emit(searchTerm);
+  }
+
+  getSearchTerm(): string {
+    return this.appGiphyStateService.getSearchTerm();
   }
 }

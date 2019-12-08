@@ -17,7 +17,6 @@ const searchlimit = 20;
 
 export class AppGiphySearchViewComponent implements OnInit, OnDestroy {
   private searchOffSet: number = 0;
-  term = '';
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -32,11 +31,15 @@ export class AppGiphySearchViewComponent implements OnInit, OnDestroy {
     });
   }
 
-  doSearch(searchTerm: string): void {
+  doSearch(searchTerm?: string): void {
     this.appGiphyStateService.setLoading(true);
 
-    this.term = searchTerm;
-    this.appGiphyDataService.doSearch(searchTerm, this.searchOffSet)
+    if (searchTerm) {
+      this.appGiphyStateService.setSearchTerm(searchTerm);
+      this.appGiphyStateService.setSearchedGifs([]);
+    }
+
+    this.appGiphyDataService.doSearch(this.appGiphyStateService.getSearchTerm(), this.searchOffSet)
       .pipe(
         catchError(() => {
           this.appGiphyStateService.setLoading(false);
@@ -54,7 +57,7 @@ export class AppGiphySearchViewComponent implements OnInit, OnDestroy {
   }
 
   loadMoreSearchResult(): void {
-    return this.doSearch(this.term);
+    return this.doSearch();
   }
 
   getGifImageUrl(gifIndex: number) {
