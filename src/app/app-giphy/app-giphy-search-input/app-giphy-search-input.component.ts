@@ -14,7 +14,6 @@ export class  AppGiphySearchInputComponent {
   constructor(private appGiphyStateService: AppGiphyStateService) {}
 
   onSearchClick(searchTerm: string): void {
-    console.log("clicked");
     this.appGiphyStateService.setSearchTerm(searchTerm);
     this.onSearch.emit(searchTerm);
   }

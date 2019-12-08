@@ -5,7 +5,11 @@
        [infiniteScrollDistance]="1"
        [infiniteScrollThrottle]="50"
        (scrolled)="onScroll()"
-        class="gif-wrapper">
-    <img class="gif-inner" *ngFor='let gif of getTrendingGifs(), let gifIndex=index' src="{{getGifImageUrl(gifIndex)}}" alt="">
+       class="gif-wrapper"
+       *ngIf="!isLoading()">
+    <img class="gif-inner" *ngFor='let gif of getTrendingGifs(), let gifIndex=index' src="{{getGifImageUrl(gifIndex)}}"
+         alt="">
   </div>
+
+  <div class="loading-spinner" *ngIf="isLoading()"></div>
 </div>

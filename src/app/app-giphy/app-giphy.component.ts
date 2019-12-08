@@ -63,6 +63,10 @@ export class AppGiphyComponent implements OnInit, OnDestroy {
     return this.appGiphyStateService.getTrendingGifs()[gifIndex].images.original.url;
   }
 
+  isLoading(): boolean {
+    return this.appGiphyStateService.isLoading();
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();

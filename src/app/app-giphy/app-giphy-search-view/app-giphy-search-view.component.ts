@@ -12,7 +12,7 @@ const searchlimit = 20;
   selector: 'app-giphy-search-view',
   templateUrl: './app-giphy-search-view.component.html',
   styleUrls: ['./app-giphy-search-view.component.scss',
-    '../app-giphy-shared.scss',]
+    '../app-giphy-shared.scss']
 })
 
 export class AppGiphySearchViewComponent implements OnInit, OnDestroy {
@@ -66,6 +66,18 @@ export class AppGiphySearchViewComponent implements OnInit, OnDestroy {
 
   getGifs() {
     return this.appGiphyStateService.getSearchedGifs();
+  }
+
+  getSearchedTerm(): string {
+    return this.appGiphyStateService.getSearchTerm();
+  }
+
+  hasResult(): boolean {
+    return !_.isEmpty(this.appGiphyStateService.getSearchedGifs());
+  }
+
+  isLoading(): boolean {
+    return this.appGiphyStateService.isLoading();
   }
 
   ngOnDestroy(): void {

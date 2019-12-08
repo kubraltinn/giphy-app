@@ -2,8 +2,14 @@
   <app-giphy-search-input (onSearch)="doSearch($event)"></app-giphy-search-input>
   <br>
 
-  <div class="gif-wrapper">
+  <div class="gif-wrapper" *ngIf="hasResult()">
     <img class="gif-inner" *ngFor='let gif of getGifs(), let gifIndex=index' src="{{getGifImageUrl(gifIndex)}}" alt="">
   </div>
-  <button class="load-more-button" (click)="loadMoreSearchResult()">Load More</button>
+
+  <div class="gif-no-result">
+    <span *ngIf="!hasResult()">No search results found.</span>
+  </div>
+
+  <button class="load-more-button" *ngIf="!isLoading() && hasResult()" (click)="loadMoreSearchResult()">Load More</button>
+  <div class="loading-spinner" *ngIf="isLoading()"></div>
 </div>
