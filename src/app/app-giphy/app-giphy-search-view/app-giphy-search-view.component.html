@@ -6,8 +6,8 @@
     <img class="gif-inner" *ngFor='let gif of getGifs(), let gifIndex=index' src="{{getGifImageUrl(gifIndex)}}" alt="">
   </div>
 
-  <div class="gif-no-result">
-    <span *ngIf="!hasResult()">No search results found.</span>
+  <div class="gif-no-result" *ngIf="!hasResult() && !isLoading()">
+    <span >No search results found.</span>
   </div>
 
   <button class="load-more-button" *ngIf="!isLoading() && hasResult()" (click)="loadMoreSearchResult()">Load More</button>
