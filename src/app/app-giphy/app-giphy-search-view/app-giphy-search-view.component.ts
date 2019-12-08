@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AppGiphyDataService} from '../app-giphy-data.service';
 import * as _ from 'lodash';
 import {AppGiphyStateService} from '../app-giphy-state.service';
 import {ActivatedRoute} from '@angular/router';
+import {of, Subject} from 'rxjs';
+import {catchError, takeUntil} from 'rxjs/operators';
 
 const searchlimit = 20;
 
@@ -10,12 +12,14 @@ const searchlimit = 20;
   selector: 'app-giphy-search-view',
   templateUrl: './app-giphy-search-view.component.html',
   styleUrls: ['./app-giphy-search-view.component.scss',
-    '../app-giphy-shared.scss', ]
+    '../app-giphy-shared.scss',]
 })
 
-export class AppGiphySearchViewComponent implements OnInit {
+export class AppGiphySearchViewComponent implements OnInit, OnDestroy {
   private searchOffSet: number = 0;
   term = '';
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private appGiphyDataService: AppGiphyDataService,
               private appGiphyStateService: AppGiphyStateService,
@@ -29,13 +33,24 @@ export class AppGiphySearchViewComponent implements OnInit {
   }
 
   doSearch(searchTerm: string): void {
-    this.term = searchTerm;
-    this.appGiphyDataService.doSearch(searchTerm, this.searchOffSet).subscribe(data => {
-      const newSearchedGifs = _.concat(this.appGiphyStateService.getSearchedGifs(), data['data']);
-      this.appGiphyStateService.setSearchedGifs(newSearchedGifs);
+    this.appGiphyStateService.setLoading(true);
 
-      this.searchOffSet += searchlimit;
-    });
+    this.term = searchTerm;
+    this.appGiphyDataService.doSearch(searchTerm, this.searchOffSet)
+      .pipe(
+        catchError(() => {
+          this.appGiphyStateService.setLoading(false);
+          return of();
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(data => {
+        const newSearchedGifs = _.concat(this.appGiphyStateService.getSearchedGifs(), data['data']);
+        this.appGiphyStateService.setSearchedGifs(newSearchedGifs);
+
+        this.searchOffSet += searchlimit;
+        this.appGiphyStateService.setLoading(false);
+      });
   }
 
   loadMoreSearchResult(): void {
@@ -50,11 +65,8 @@ export class AppGiphySearchViewComponent implements OnInit {
     return this.appGiphyStateService.getSearchedGifs();
   }
 
-  getGifHeight(gifIndex: number) {
-    return this.appGiphyStateService.getSearchedGifs()[gifIndex].images.original.height;
-  }
-
-  getGifWidth(gifIndex: number) {
-    return this.appGiphyStateService.getSearchedGifs()[gifIndex].images.original.width;
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
